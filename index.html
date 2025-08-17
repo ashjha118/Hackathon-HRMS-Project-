@@ -5,17 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HRMS – Demo</title>
 <link rel="stylesheet" href="style.css">
-<style>
-  body { font-family: Arial, sans-serif; }
-  header { display:flex; justify-content:space-between; padding:10px; background:#0077b6; color:white; }
-  header a { color:white; text-decoration:none; cursor:pointer; }
-  .image-container { text-align:center; margin:20px; }
-  #loginForm, #liveForm { margin-top:15px; padding:15px; border:1px solid #ccc; border-radius:8px; background:#f9f9f9; }
-  input, select, button { margin:5px 0; padding:8px; width:100%; max-width:300px; }
-  button { cursor:pointer; background:#0077b6; color:white; border:none; border-radius:5px; }
-  .result-card, .contact-card { margin:10px 0; padding:10px; border:1px solid #ddd; border-radius:6px; }
-  footer { text-align:center; margin-top:20px; padding:10px; background:#eee; }
-</style>
 </head>
 <body>
 
@@ -47,17 +36,113 @@
   <button id="showLiveBtn">Show Availability Form</button>
   <div id="liveForm" style="display:none;">
     <div class="grid">
+
+<!-- Doctor Type -->
+<select id="doctorType">
+  <option value="">Select Doctor Type</option>
+  <option value="general">General Physician</option>
+  <option value="cardiologist">Cardiologist (Heart Specialist)</option>
+  <option value="neurologist">Neurologist (Brain/Nerves)</option>
+  <option value="orthopedic">Orthopedic (Bone/Joint)</option>
+  <option value="pediatrician">Pediatrician (Child Specialist)</option>
+  <option value="gynecologist">Gynecologist (Women Specialist)</option>
+  <option value="dermatologist">Dermatologist (Skin Specialist)</option>
+  <option value="dentist">Dentist</option>
+  <option value="ent">ENT Specialist (Ear, Nose, Throat)</option>
+  <option value="psychiatrist">Psychiatrist (Mental Health)</option>
+  <option value="pulmonologist">Pulmonologist (Lungs Specialist)</option>
+  <option value="urologist">Urologist (Urine/Kidney)</option>
+  <option value="nephrologist">Nephrologist (Kidney Specialist)</option>
+  <option value="oncologist">Oncologist (Cancer Specialist)</option>
+  <option value="endocrinologist">Endocrinologist (Hormones/Diabetes)</option>
+  <option value="gastroenterologist">Gastroenterologist (Stomach/Liver)</option>
+  <option value="rheumatologist">Rheumatologist (Arthritis/Autoimmune)</option>
+  <option value="surgeon">General Surgeon</option>
+  <option value="plastic">Plastic Surgeon</option>
+  <option value="anesthesiologist">Anesthesiologist</option>
+  <option value="radiologist">Radiologist</option>
+  <option value="pathologist">Pathologist</option>
+</select>
+
+<p id="selectedDoctor" style="margin-top:10px; font-weight:bold;"></p>
+
+<script>
+  // doctor select element ko pakdo
+  const doctorSelect = document.getElementById("doctorType");
+  const selectedDoctorText = document.getElementById("selectedDoctor");
+
+  // jab doctor select hota hai
+  doctorSelect.addEventListener("change", function () {
+    let selectedValue = doctorSelect.value; // doctor ka value
+    let selectedName = doctorSelect.options[doctorSelect.selectedIndex].text; // doctor ka naam
+
+    if (selectedValue) {
+      selectedDoctorText.textContent = "Selected Doctor: " + selectedName;
+    } else {
+      selectedDoctorText.textContent = "";
+    }
+  });
+</script>
+
+
+      <!-- Resource -->
       <select>
         <option>BED</option>
         <option>ICU</option>
         <option>OXYGEN</option>
         <option>VENTILATOR</option>
       </select>
-      <input type="number" step="0.0001" value="23.2599" placeholder="Lat">
-      <input type="number" step="0.0001" value="77.4126" placeholder="Lng">
+
+      <!-- Country -->
+      <select id="countrySelect">
+        <option value="India">India</option>
+      </select>
+
+      <!-- State -->
+      <select id="stateSelect">
+        <option value="">Select State</option>
+        <option value="AP">Andhra Pradesh</option>
+        <option value="AR">Arunachal Pradesh</option>
+        <option value="AS">Assam</option>
+        <option value="BR">Bihar</option>
+        <option value="CG">Chhattisgarh</option>
+        <option value="GA">Goa</option>
+        <option value="GJ">Gujarat</option>
+        <option value="HR">Haryana</option>
+        <option value="HP">Himachal Pradesh</option>
+        <option value="JH">Jharkhand</option>
+        <option value="KA">Karnataka</option>
+        <option value="KL">Kerala</option>
+        <option value="MP">Madhya Pradesh</option>
+        <option value="MH">Maharashtra</option>
+        <option value="MN">Manipur</option>
+        <option value="ML">Meghalaya</option>
+        <option value="MZ">Mizoram</option>
+        <option value="NL">Nagaland</option>
+        <option value="OD">Odisha</option>
+        <option value="PB">Punjab</option>
+        <option value="RJ">Rajasthan</option>
+        <option value="SK">Sikkim</option>
+        <option value="TN">Tamil Nadu</option>
+        <option value="TS">Telangana</option>
+        <option value="TR">Tripura</option>
+        <option value="UP">Uttar Pradesh</option>
+        <option value="UK">Uttarakhand</option>
+        <option value="WB">West Bengal</option>
+      </select>
+
+      <!-- District -->
+      <select id="districtSelect">
+        <option value="">Select District</option>
+      </select>
+
+      <!-- Min Availability -->
       <input type="number" value="1" placeholder="Min avail">
+
       <button>Search</button>
     </div>
+
+    <!-- Example Results -->
     <div class="result-card">
       <div class="hospital-name">City Hospital – Main Branch</div>
       <div class="available">Available: 5</div>
@@ -68,6 +153,74 @@
     </div>
   </div>
 </section>
+
+<script>
+ // Sample districts data for all states (famous districts only)
+const districts = {
+  "AP": ["Visakhapatnam", "Vijayawada", "Guntur", "Tirupati", "Kurnool"],         // Andhra Pradesh
+  "AR": ["Itanagar", "Tawang", "Ziro", "Pasighat"],                               // Arunachal Pradesh
+  "AS": ["Guwahati", "Dibrugarh", "Silchar", "Jorhat"],                           // Assam
+  "BR": ["Patna", "Gaya", "Muzaffarpur", "Bhagalpur"],                            // Bihar
+  "CG": ["Raipur", "Bilaspur", "Durg", "Jagdalpur"],                              // Chhattisgarh
+  "GA": ["Panaji", "Margao", "Vasco da Gama", "Mapusa"],                          // Goa
+  "GJ": ["Ahmedabad", "Surat", "Vadodara", "Rajkot", "Bhavnagar"],                // Gujarat
+  "HR": ["Gurugram", "Faridabad", "Panipat", "Hisar"],                            // Haryana
+  "HP": ["Shimla", "Manali", "Dharamshala", "Solan"],                             // Himachal Pradesh
+  "JH": ["Ranchi", "Jamshedpur", "Dhanbad", "Bokaro"],                            // Jharkhand
+  "KA": ["Bengaluru", "Mysuru", "Mangaluru", "Hubli"],                            // Karnataka
+  "KL": ["Thiruvananthapuram", "Kochi", "Kozhikode", "Thrissur"],                 // Kerala
+  "MP": ["Bhopal", "Indore", "Gwalior", "Jabalpur"],                              // Madhya Pradesh
+  "MH": ["Mumbai", "Pune", "Nagpur", "Nashik", "Aurangabad"],                     // Maharashtra
+  "MN": ["Imphal", "Churachandpur", "Thoubal"],                                   // Manipur
+  "ML": ["Shillong", "Tura", "Jowai"],                                            // Meghalaya
+  "MZ": ["Aizawl", "Lunglei", "Champhai"],                                        // Mizoram
+  "NL": ["Kohima", "Dimapur", "Mokokchung"],                                      // Nagaland
+  "OD": ["Bhubaneswar", "Cuttack", "Puri", "Rourkela"],                           // Odisha
+  "PB": ["Amritsar", "Ludhiana", "Jalandhar", "Patiala"],                         // Punjab
+  "RJ": ["Jaipur", "Udaipur", "Jodhpur", "Ajmer", "Kota"],                        // Rajasthan
+  "SK": ["Gangtok", "Namchi", "Geyzing"],                                         // Sikkim
+  "TN": ["Chennai", "Coimbatore", "Madurai", "Tiruchirappalli"],                  // Tamil Nadu
+  "TS": ["Hyderabad", "Warangal", "Nizamabad", "Karimnagar"],                     // Telangana
+  "TR": ["Agartala", "Udaipur", "Dharmanagar"],                                   // Tripura
+  "UP": ["Lucknow", "Kanpur", "Varanasi", "Agra", "Prayagraj"],                   // Uttar Pradesh
+  "UK": ["Dehradun", "Haridwar", "Nainital", "Rishikesh"],                        // Uttarakhand
+  "WB": ["Kolkata", "Darjeeling", "Siliguri", "Asansol"],                         // West Bengal
+
+  // Union Territories
+  "DL": ["New Delhi", "Dwarka", "Saket"],                                         // Delhi (NCT)
+  "CH": ["Chandigarh"],                                                           // Chandigarh
+  "JK": ["Srinagar", "Jammu", "Anantnag"],                                        // Jammu & Kashmir
+  "LA": ["Leh", "Kargil"],                                                        // Ladakh
+  "PY": ["Puducherry", "Karaikal", "Mahe"],                                       // Puducherry
+  "AN": ["Port Blair"],                                                           // Andaman & Nicobar Islands
+  "DN": ["Silvassa"],                                                             // Dadra & Nagar Haveli
+  "DD": ["Diu", "Daman"],                                                         // Daman & Diu
+  "LD": ["Kavaratti"]                                                             // Lakshadweep
+};
+
+  // State change event → update districts
+  document.getElementById("stateSelect").addEventListener("change", function() {
+    const stateCode = this.value;
+    const districtSelect = document.getElementById("districtSelect");
+    districtSelect.innerHTML = "<option value=''>Select District</option>";
+
+    if (districts[stateCode]) {
+      districts[stateCode].forEach(d => {
+        let opt = document.createElement("option");
+        opt.value = d;
+        opt.textContent = d;
+        districtSelect.appendChild(opt);
+      });
+    }
+  });
+
+  // Show/hide availability form
+  document.getElementById("showLiveBtn").addEventListener("click", function() {
+    const form = document.getElementById("liveForm");
+    form.style.display = (form.style.display === "none") ? "block" : "none";
+  });
+</script>
+
 
 <!-- Emergency Contacts -->
 <section id="emergency">
@@ -122,18 +275,6 @@
     document.getElementById("showLoginBtn").textContent = "Login"; // reset button text
     document.getElementById("email").value = ""; // clear fields
     document.getElementById("password").value = "";
-  });
-
-  // Live availability toggle
-  document.getElementById("showLiveBtn").addEventListener("click", function(){
-    let liveForm = document.getElementById("liveForm");
-    if(liveForm.style.display === "none"){
-      liveForm.style.display = "block";
-      this.textContent = "Hide Availability";
-    } else {
-      liveForm.style.display = "none";
-      this.textContent = "Show Availability Form";
-    }
   });
 </script>
 
