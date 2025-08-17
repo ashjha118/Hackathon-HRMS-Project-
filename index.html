@@ -8,138 +8,77 @@
 </head>
 <body>
 
-<!-- Header -->
 <header>
   <h1>HRMS Admin</h1>
   <a href="#" id="logoutBtn" style="display:none;">Logout</a>
 </header>
 
-<!-- Doctor Image -->
 <div class="image-container">
   <img src="doctor_cartoon.webp" alt="Doctor Cartoon" width="200">
 </div>
-  
+
+<!-- Signup Section -->
+<button id="toggleSignupBtn">Signup</button>
+<section id="signupSection" style="display:none;">
+  <h2>Signup</h2>
+  <input type="text" id="firstName" placeholder="First Name">
+  <input type="text" id="middleName" placeholder="Middle Name">
+  <input type="text" id="lastName" placeholder="Last Name">
+  <input type="email" id="signupEmail" placeholder="Email">
+  <input type="password" id="signupPassword" placeholder="Password">
+  <input type="date" id="dob" placeholder="Date of Birth">
+  <button id="signupBtn">Signup</button>
+</section>
+
 <!-- Login Section -->
-<section id="login">
+<section id="loginSection">
   <h2>HRMS Login</h2>
-  <button id="showLoginBtn">Login</button>
+  <button id="toggleLoginBtn">Login</button>
   <div id="loginForm" style="display:none;">
-    <input type="text" id="email" placeholder="Email">
+    <input type="email" id="email" placeholder="Email">
     <input type="password" id="password" placeholder="Password">
     <button id="loginBtn">Submit</button>
   </div>
 </section>
 
-<!-- Live Availability (Initially hidden) -->
-<section id="live-availability" style="display:none;">
+<!-- Live Availability Section -->
+<section id="liveSection" style="display:none;">
   <h2>Live Availability</h2>
-  <button id="showLiveBtn">Show Availability Form</button>
+  <button id="toggleLiveBtn">Show Availability Form</button>
   <div id="liveForm" style="display:none;">
     <div class="grid">
-
-<!-- Doctor Type -->
-<select id="doctorType">
-  <option value="">Select Doctor Type</option>
-  <option value="general">General Physician</option>
-  <option value="cardiologist">Cardiologist (Heart Specialist)</option>
-  <option value="neurologist">Neurologist (Brain/Nerves)</option>
-  <option value="orthopedic">Orthopedic (Bone/Joint)</option>
-  <option value="pediatrician">Pediatrician (Child Specialist)</option>
-  <option value="gynecologist">Gynecologist (Women Specialist)</option>
-  <option value="dermatologist">Dermatologist (Skin Specialist)</option>
-  <option value="dentist">Dentist</option>
-  <option value="ent">ENT Specialist (Ear, Nose, Throat)</option>
-  <option value="psychiatrist">Psychiatrist (Mental Health)</option>
-  <option value="pulmonologist">Pulmonologist (Lungs Specialist)</option>
-  <option value="urologist">Urologist (Urine/Kidney)</option>
-  <option value="nephrologist">Nephrologist (Kidney Specialist)</option>
-  <option value="oncologist">Oncologist (Cancer Specialist)</option>
-  <option value="endocrinologist">Endocrinologist (Hormones/Diabetes)</option>
-  <option value="gastroenterologist">Gastroenterologist (Stomach/Liver)</option>
-  <option value="rheumatologist">Rheumatologist (Arthritis/Autoimmune)</option>
-  <option value="surgeon">General Surgeon</option>
-  <option value="plastic">Plastic Surgeon</option>
-  <option value="anesthesiologist">Anesthesiologist</option>
-  <option value="radiologist">Radiologist</option>
-  <option value="pathologist">Pathologist</option>
-</select>
-
-<p id="selectedDoctor" style="margin-top:10px; font-weight:bold;"></p>
-
-<script>
-  // doctor select element ko pakdo
-  const doctorSelect = document.getElementById("doctorType");
-  const selectedDoctorText = document.getElementById("selectedDoctor");
-
-  // jab doctor select hota hai
-  doctorSelect.addEventListener("change", function () {
-    let selectedValue = doctorSelect.value; // doctor ka value
-    let selectedName = doctorSelect.options[doctorSelect.selectedIndex].text; // doctor ka naam
-
-    if (selectedValue) {
-      selectedDoctorText.textContent = "Selected Doctor: " + selectedName;
-    } else {
-      selectedDoctorText.textContent = "";
-    }
-  });
-</script>
-
+      <!-- Doctor Type -->
+      <select id="doctorType">
+        <option value="">Select Doctor Type</option>
+        <option value="general">General Physician</option>
+        <option value="cardiologist">Cardiologist</option>
+        <option value="neurologist">Neurologist</option>
+        <!-- Add remaining types -->
+      </select>
+      <p id="selectedDoctor" style="font-weight:bold;"></p>
 
       <!-- Resource -->
-      <select>
+      <select id="resourceSelect">
+        <option value="">Select Resource</option>
         <option>BED</option>
         <option>ICU</option>
         <option>OXYGEN</option>
         <option>VENTILATOR</option>
       </select>
 
-      <!-- Country -->
-      <select id="countrySelect">
-        <option value="India">India</option>
-      </select>
-
-      <!-- State -->
+      <!-- State & District -->
       <select id="stateSelect">
         <option value="">Select State</option>
-        <option value="AP">Andhra Pradesh</option>
-        <option value="AR">Arunachal Pradesh</option>
-        <option value="AS">Assam</option>
-        <option value="BR">Bihar</option>
-        <option value="CG">Chhattisgarh</option>
-        <option value="GA">Goa</option>
-        <option value="GJ">Gujarat</option>
-        <option value="HR">Haryana</option>
-        <option value="HP">Himachal Pradesh</option>
-        <option value="JH">Jharkhand</option>
-        <option value="KA">Karnataka</option>
-        <option value="KL">Kerala</option>
         <option value="MP">Madhya Pradesh</option>
         <option value="MH">Maharashtra</option>
-        <option value="MN">Manipur</option>
-        <option value="ML">Meghalaya</option>
-        <option value="MZ">Mizoram</option>
-        <option value="NL">Nagaland</option>
-        <option value="OD">Odisha</option>
-        <option value="PB">Punjab</option>
-        <option value="RJ">Rajasthan</option>
-        <option value="SK">Sikkim</option>
-        <option value="TN">Tamil Nadu</option>
-        <option value="TS">Telangana</option>
-        <option value="TR">Tripura</option>
-        <option value="UP">Uttar Pradesh</option>
-        <option value="UK">Uttarakhand</option>
-        <option value="WB">West Bengal</option>
+        <!-- Add remaining states -->
       </select>
-
-      <!-- District -->
       <select id="districtSelect">
         <option value="">Select District</option>
       </select>
 
-      <!-- Min Availability -->
-      <input type="number" value="1" placeholder="Min avail">
-
-      <button>Search</button>
+      <input type="number" id="minAvailability" placeholder="Min Availability" value="1">
+      <button id="searchBtn">Search</button>
     </div>
 
     <!-- Example Results -->
@@ -154,76 +93,8 @@
   </div>
 </section>
 
-<script>
- // Sample districts data for all states (famous districts only)
-const districts = {
-  "AP": ["Visakhapatnam", "Vijayawada", "Guntur", "Tirupati", "Kurnool"],         // Andhra Pradesh
-  "AR": ["Itanagar", "Tawang", "Ziro", "Pasighat"],                               // Arunachal Pradesh
-  "AS": ["Guwahati", "Dibrugarh", "Silchar", "Jorhat"],                           // Assam
-  "BR": ["Patna", "Gaya", "Muzaffarpur", "Bhagalpur"],                            // Bihar
-  "CG": ["Raipur", "Bilaspur", "Durg", "Jagdalpur"],                              // Chhattisgarh
-  "GA": ["Panaji", "Margao", "Vasco da Gama", "Mapusa"],                          // Goa
-  "GJ": ["Ahmedabad", "Surat", "Vadodara", "Rajkot", "Bhavnagar"],                // Gujarat
-  "HR": ["Gurugram", "Faridabad", "Panipat", "Hisar"],                            // Haryana
-  "HP": ["Shimla", "Manali", "Dharamshala", "Solan"],                             // Himachal Pradesh
-  "JH": ["Ranchi", "Jamshedpur", "Dhanbad", "Bokaro"],                            // Jharkhand
-  "KA": ["Bengaluru", "Mysuru", "Mangaluru", "Hubli"],                            // Karnataka
-  "KL": ["Thiruvananthapuram", "Kochi", "Kozhikode", "Thrissur"],                 // Kerala
-  "MP": ["Bhopal", "Indore", "Gwalior", "Jabalpur"],                              // Madhya Pradesh
-  "MH": ["Mumbai", "Pune", "Nagpur", "Nashik", "Aurangabad"],                     // Maharashtra
-  "MN": ["Imphal", "Churachandpur", "Thoubal"],                                   // Manipur
-  "ML": ["Shillong", "Tura", "Jowai"],                                            // Meghalaya
-  "MZ": ["Aizawl", "Lunglei", "Champhai"],                                        // Mizoram
-  "NL": ["Kohima", "Dimapur", "Mokokchung"],                                      // Nagaland
-  "OD": ["Bhubaneswar", "Cuttack", "Puri", "Rourkela"],                           // Odisha
-  "PB": ["Amritsar", "Ludhiana", "Jalandhar", "Patiala"],                         // Punjab
-  "RJ": ["Jaipur", "Udaipur", "Jodhpur", "Ajmer", "Kota"],                        // Rajasthan
-  "SK": ["Gangtok", "Namchi", "Geyzing"],                                         // Sikkim
-  "TN": ["Chennai", "Coimbatore", "Madurai", "Tiruchirappalli"],                  // Tamil Nadu
-  "TS": ["Hyderabad", "Warangal", "Nizamabad", "Karimnagar"],                     // Telangana
-  "TR": ["Agartala", "Udaipur", "Dharmanagar"],                                   // Tripura
-  "UP": ["Lucknow", "Kanpur", "Varanasi", "Agra", "Prayagraj"],                   // Uttar Pradesh
-  "UK": ["Dehradun", "Haridwar", "Nainital", "Rishikesh"],                        // Uttarakhand
-  "WB": ["Kolkata", "Darjeeling", "Siliguri", "Asansol"],                         // West Bengal
-
-  // Union Territories
-  "DL": ["New Delhi", "Dwarka", "Saket"],                                         // Delhi (NCT)
-  "CH": ["Chandigarh"],                                                           // Chandigarh
-  "JK": ["Srinagar", "Jammu", "Anantnag"],                                        // Jammu & Kashmir
-  "LA": ["Leh", "Kargil"],                                                        // Ladakh
-  "PY": ["Puducherry", "Karaikal", "Mahe"],                                       // Puducherry
-  "AN": ["Port Blair"],                                                           // Andaman & Nicobar Islands
-  "DN": ["Silvassa"],                                                             // Dadra & Nagar Haveli
-  "DD": ["Diu", "Daman"],                                                         // Daman & Diu
-  "LD": ["Kavaratti"]                                                             // Lakshadweep
-};
-
-  // State change event → update districts
-  document.getElementById("stateSelect").addEventListener("change", function() {
-    const stateCode = this.value;
-    const districtSelect = document.getElementById("districtSelect");
-    districtSelect.innerHTML = "<option value=''>Select District</option>";
-
-    if (districts[stateCode]) {
-      districts[stateCode].forEach(d => {
-        let opt = document.createElement("option");
-        opt.value = d;
-        opt.textContent = d;
-        districtSelect.appendChild(opt);
-      });
-    }
-  });
-
-  // Show/hide availability form
-  document.getElementById("showLiveBtn").addEventListener("click", function() {
-    const form = document.getElementById("liveForm");
-    form.style.display = (form.style.display === "none") ? "block" : "none";
-  });
-</script>
-
-
 <!-- Emergency Contacts -->
-<section id="emergency">
+<section id="emergencySection">
   <h2>Emergency Contacts</h2>
   <div class="contact-card"><span>Ambulance:</span> <a href="tel:102">102</a></div>
   <div class="contact-card"><span>Police:</span> <a href="tel:100">100</a></div>
@@ -235,49 +106,130 @@ const districts = {
 </footer>
 
 <script>
-  // Login toggle
-  document.getElementById("showLoginBtn").addEventListener("click", function(){
-    let loginForm = document.getElementById("loginForm");
-    if(loginForm.style.display === "none"){
-      loginForm.style.display = "block";
-      this.textContent = "Hide Login";
-    } else {
-      loginForm.style.display = "none";
-      this.textContent = "Login";
+  // ---------- Toggle Sections ----------
+  const toggleSignupBtn = document.getElementById("toggleSignupBtn");
+  const signupSection = document.getElementById("signupSection");
+  toggleSignupBtn.addEventListener("click", () => {
+    signupSection.style.display = signupSection.style.display === "none" ? "block" : "none";
+    toggleSignupBtn.textContent = signupSection.style.display === "block" ? "Hide Signup Form" : "Signup";
+  });
+
+  const toggleLoginBtn = document.getElementById("toggleLoginBtn");
+  const loginForm = document.getElementById("loginForm");
+  toggleLoginBtn.addEventListener("click", () => {
+    loginForm.style.display = loginForm.style.display === "none" ? "block" : "none";
+    toggleLoginBtn.textContent = loginForm.style.display === "block" ? "Hide Login" : "Login";
+  });
+
+  const toggleLiveBtn = document.getElementById("toggleLiveBtn");
+  const liveForm = document.getElementById("liveForm");
+  toggleLiveBtn.addEventListener("click", () => {
+    liveForm.style.display = liveForm.style.display === "none" ? "block" : "none";
+  });
+
+  // ---------- Signup ----------
+  document.getElementById("signupBtn").addEventListener("click", async () => {
+    const payload = {
+      firstName: document.getElementById("firstName").value,
+      middleName: document.getElementById("middleName").value,
+      lastName: document.getElementById("lastName").value,
+      email: document.getElementById("signupEmail").value,
+      password: document.getElementById("signupPassword").value,
+      dob: document.getElementById("dob").value
+    };
+
+    try {
+      const res = await fetch("http://localhost:4000/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      alert(res.ok ? data.message : data.error);
+      if(res.ok){
+        signupSection.style.display = "none";
+        toggleSignupBtn.textContent = "Signup";
+      }
+    } catch(e) {
+      console.error(e);
+      alert("Server error ❌");
     }
   });
 
-  // Fake login functionality
-  document.getElementById("loginBtn").addEventListener("click", function(){
-    let email = document.getElementById("email").value;
-    let pass = document.getElementById("password").value;
+  // ---------- Login & Logout ----------
+  const logoutBtn = document.getElementById("logoutBtn");
+  const loginSection = document.getElementById("loginSection");
+  const liveSection = document.getElementById("liveSection");
+  const emergencySection = document.getElementById("emergencySection");
+
+  function setLoggedIn() {
+    loginSection.style.display = "none";
+    liveSection.style.display = "block";
+    emergencySection.style.display = "none";
+    logoutBtn.style.display = "inline-block";
+    toggleSignupBtn.style.display = "none";
+    signupSection.style.display = "none";
+  }
+
+  function setLoggedOut() {
+    loginSection.style.display = "block";
+    liveSection.style.display = "none";
+    emergencySection.style.display = "block";
+    logoutBtn.style.display = "none";
+    toggleSignupBtn.style.display = "inline-block";
+    signupSection.style.display = "none";
+    loginForm.style.display = "none";
+    toggleLoginBtn.textContent = "Login";
+    document.getElementById("email").value = "";
+    document.getElementById("password").value = "";
+  }
+
+  window.onload = () => {
+    localStorage.getItem("loggedIn") === "true" ? setLoggedIn() : setLoggedOut();
+  };
+
+  document.getElementById("loginBtn").addEventListener("click", () => {
+    const email = document.getElementById("email").value;
+    const pass = document.getElementById("password").value;
 
     if(email === "admin@hrms.local" && pass === "Admin#1234"){
       alert("Login Successful ✅");
-      document.getElementById("login").style.display = "none"; // hide login
-      document.getElementById("live-availability").style.display = "block"; // show availability
-      document.getElementById("emergency").style.display = "none"; // hide emergency
-      document.getElementById("logoutBtn").style.display = "inline-block"; // show logout
-    } else {
-      alert("Invalid Email or Password ❌");
-    }
+      localStorage.setItem("loggedIn","true");
+      setLoggedIn();
+    } else alert("Invalid Email or Password ❌");
   });
-  
 
-  // Logout functionality
-  document.getElementById("logoutBtn").addEventListener("click", function(e){
+  logoutBtn.addEventListener("click", e => {
     e.preventDefault();
     alert("Logged Out 🚪");
-    document.getElementById("logoutBtn").style.display = "none"; // hide logout
-    document.getElementById("live-availability").style.display = "none"; // hide availability
-    document.getElementById("login").style.display = "block"; // show login
-    document.getElementById("emergency").style.display = "block"; // show emergency
-    document.getElementById("loginForm").style.display = "none"; // reset login form hidden
-    document.getElementById("showLoginBtn").textContent = "Login"; // reset button text
-    document.getElementById("email").value = ""; // clear fields
-    document.getElementById("password").value = "";
+    localStorage.removeItem("loggedIn");
+    setLoggedOut();
+  });
+
+  // ---------- Doctor Selection ----------
+  const doctorSelect = document.getElementById("doctorType");
+  const selectedDoctorText = document.getElementById("selectedDoctor");
+  doctorSelect.addEventListener("change", () => {
+    selectedDoctorText.textContent = doctorSelect.value ? "Selected Doctor: " + doctorSelect.options[doctorSelect.selectedIndex].text : "";
+  });
+
+  // ---------- State → District ----------
+  const districts = {
+    "MP": ["Bhopal", "Indore", "Gwalior", "Jabalpur"],
+    "MH": ["Mumbai", "Pune", "Nagpur", "Nashik"]
+  };
+  document.getElementById("stateSelect").addEventListener("change", function(){
+    const districtSelect = document.getElementById("districtSelect");
+    districtSelect.innerHTML = "<option value=''>Select District</option>";
+    if(districts[this.value]){
+      districts[this.value].forEach(d => {
+        let opt = document.createElement("option");
+        opt.value = d;
+        opt.textContent = d;
+        districtSelect.appendChild(opt);
+      });
+    }
   });
 </script>
-
 </body>
 </html>
