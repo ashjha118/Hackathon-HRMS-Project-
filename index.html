@@ -5,34 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HRMS – Demo</title>
 <link rel="stylesheet" href="style.css">
-
+<style>
+  body { font-family: Arial, sans-serif; }
+  header { display:flex; justify-content:space-between; padding:10px; background:#0077b6; color:white; }
+  header a { color:white; text-decoration:none; cursor:pointer; }
+  .image-container { text-align:center; margin:20px; }
+  #loginForm, #liveForm { margin-top:15px; padding:15px; border:1px solid #ccc; border-radius:8px; background:#f9f9f9; }
+  input, select, button { margin:5px 0; padding:8px; width:100%; max-width:300px; }
+  button { cursor:pointer; background:#0077b6; color:white; border:none; border-radius:5px; }
+  .result-card, .contact-card { margin:10px 0; padding:10px; border:1px solid #ddd; border-radius:6px; }
+  footer { text-align:center; margin-top:20px; padding:10px; background:#eee; }
+</style>
 </head>
 <body>
 
 <!-- Header -->
 <header>
   <h1>HRMS Admin</h1>
-  <a href="#">Logout</a>
+  <a href="#" id="logoutBtn" style="display:none;">Logout</a>
 </header>
 
 <!-- Doctor Image -->
 <div class="image-container">
-  <img src="doctor_cartoon.webp" alt="Doctor Cartoon">
+  <img src="doctor_cartoon.webp" alt="Doctor Cartoon" width="200">
 </div>
 
 <!-- Login Section -->
 <section id="login">
   <h2>HRMS Login</h2>
-  <button id="showLoginBtn">Show Login</button>
+  <button id="showLoginBtn">Login</button>
   <div id="loginForm" style="display:none;">
-    <input type="text" placeholder="Email" value="admin@hrms.local">
-    <input type="password" placeholder="Password" value="Admin#1234">
-    <button>Login</button>
+    <input type="text" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+    <button id="loginBtn">Submit</button>
   </div>
 </section>
 
-<!-- Live Availability -->
-<section id="live-availability">
+<!-- Live Availability (Initially hidden) -->
+<section id="live-availability" style="display:none;">
   <h2>Live Availability</h2>
   <button id="showLiveBtn">Show Availability Form</button>
   <div id="liveForm" style="display:none;">
@@ -71,7 +81,61 @@
   Connected to: <code>http://localhost:4000</code>
 </footer>
 
+<script>
+  // Login toggle
+  document.getElementById("showLoginBtn").addEventListener("click", function(){
+    let loginForm = document.getElementById("loginForm");
+    if(loginForm.style.display === "none"){
+      loginForm.style.display = "block";
+      this.textContent = "Hide Login";
+    } else {
+      loginForm.style.display = "none";
+      this.textContent = "Login";
+    }
+  });
 
+  // Fake login functionality
+  document.getElementById("loginBtn").addEventListener("click", function(){
+    let email = document.getElementById("email").value;
+    let pass = document.getElementById("password").value;
+
+    if(email === "admin@hrms.local" && pass === "Admin#1234"){
+      alert("Login Successful ✅");
+      document.getElementById("login").style.display = "none"; // hide login
+      document.getElementById("live-availability").style.display = "block"; // show availability
+      document.getElementById("emergency").style.display = "none"; // hide emergency
+      document.getElementById("logoutBtn").style.display = "inline-block"; // show logout
+    } else {
+      alert("Invalid Email or Password ❌");
+    }
+  });
+
+  // Logout functionality
+  document.getElementById("logoutBtn").addEventListener("click", function(e){
+    e.preventDefault();
+    alert("Logged Out 🚪");
+    document.getElementById("logoutBtn").style.display = "none"; // hide logout
+    document.getElementById("live-availability").style.display = "none"; // hide availability
+    document.getElementById("login").style.display = "block"; // show login
+    document.getElementById("emergency").style.display = "block"; // show emergency
+    document.getElementById("loginForm").style.display = "none"; // reset login form hidden
+    document.getElementById("showLoginBtn").textContent = "Login"; // reset button text
+    document.getElementById("email").value = ""; // clear fields
+    document.getElementById("password").value = "";
+  });
+
+  // Live availability toggle
+  document.getElementById("showLiveBtn").addEventListener("click", function(){
+    let liveForm = document.getElementById("liveForm");
+    if(liveForm.style.display === "none"){
+      liveForm.style.display = "block";
+      this.textContent = "Hide Availability";
+    } else {
+      liveForm.style.display = "none";
+      this.textContent = "Show Availability Form";
+    }
+  });
+</script>
 
 </body>
 </html>
